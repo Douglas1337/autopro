@@ -1,0 +1,41 @@
+{% extends 'pages/base.html' %}
+{% block title %}Veículos · autoPRO{% endblock %}
+{% block content %}
+  <h1>Veículos</h1>
+  <form method="get" style="margin: 12px 0; display:flex;gap: 8px;">
+    <input type="text" name="q" value="{{ q }}" placeholder="Search form vehicle plate, brand or model." style="flex:1; padding: 8px;">
+    <button class="btn" type="submit"> Search </button>
+    <a class="btn btn--ghost" href="{% url 'vehicles:create' %}"> + New</a>
+  </form>
+  <div class="card" style="overflow: auto;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Plate</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Production Year</th>
+          <th>Client Owner</th>
+          <th style="width: 140px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for v in vehicles %}
+        <tr>
+          <td>{{ v.plate }}</td>
+          <td>{{ v.brand }}</td>
+          <td>{{ v.model }}</td>
+          <td>{{ v.production_year }}</td>
+          <td>{{ v.client.name }}</td>
+          <td>
+            <a href="{% url 'vehicles:update' v.pk %}">Edit</a> .
+            <a href="{% url 'vehicles:delete' v.pk %}">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6"> No vehicle added. </td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

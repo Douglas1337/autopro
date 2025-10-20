@@ -1,0 +1,16 @@
+{% extends 'pages/base.html' %}
+{% block title %}Service Order · autoPRO{% endblock %}
+{% block content %}
+
+<h1>{{ object.pk|yesno:"Edit Service Order,New Service Order" }}</h1>
+
+<form method="post" class="card" style="display:grid; gap:12px;">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <div style="display:flex; gap:8px;">
+    <button class="btn" type="submit">Save</button>
+    <a class="btn btn--ghost" href="{% url 'service_order:list' %}">Cancel</a>
+  </div>
+</form>
+
+{% endblock %}

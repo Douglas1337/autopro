@@ -1,0 +1,78 @@
+/* ===== Reset e tokens ===== */
+* { box-sizing: border-box; }
+:root{
+  --bg-1:#121212; --bg-2:#1d1f23; --card:#23262b;
+  --text:#e8eaed; --muted:#a3a7ad; --brand:#0ea5e9; --brand-2:#fb923c;
+  --line:#2d3137; --radius:14px; --shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+html, body { margin:0; padding:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
+img{ max-width:100%; display:block; }
+
+/* ===== Temas ===== */
+.theme-dark { background: var(--bg-1); color: var(--text); }
+
+/* ===== Layout util ===== */
+.container{ width:min(1100px, 92%); margin-inline:auto; }
+
+/* ===== Topbar / Brand / Nav ===== */
+.topbar{ background: var(--bg-2); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:10; }
+.topbar__inner{ display:flex; align-items:center; gap:20px; padding:14px 0; }
+
+.brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text); font-weight:700; letter-spacing:.2px; }
+.brand__logo {
+  width: 44px;   /* ajusta aqui */
+  height: 44px;  /* mantêm quadrada */
+  border-radius: 6px;
+}
+.brand__name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.nav{ display:flex; gap:14px; margin-left:auto; align-items:center; }
+.nav__link{
+  padding:8px 12px; border-radius:10px; text-decoration:none; color:var(--text);
+  transition: background .18s ease, color .18s ease, transform .06s ease;
+}
+.nav__link:hover{ background: #2a2f35; }
+.nav__link:active{ transform: translateY(1px); }
+.nav__link--cta{
+  background: var(--brand); color:#001018; font-weight:700;
+}
+.nav__link--cta:hover{ background:#16b5ff; }
+
+/* ===== Hero (use na home) ===== */
+.hero{ display:grid; place-items:center; text-align:center; padding:56px 0 32px; background:linear-gradient(180deg, var(--bg-2), transparent); }
+.hero__title{ font-size: clamp(1.8rem, 2.2vw + 1rem, 2.4rem); margin: 6px 0 8px; }
+.hero__subtitle{ color: var(--muted); max-width: 760px; }
+
+/* ===== Cards / Seções ===== */
+.section{ margin: 28px 0 40px; }
+.card{
+  background: var(--card); border:1px solid var(--line); border-radius: var(--radius);
+  padding: 18px 20px; box-shadow: var(--shadow);
+}
+
+/* ===== Botões ===== */
+.btn{
+  display:inline-block; border:0; border-radius:12px; padding:10px 16px;
+  background: var(--brand); color:#001018; font-weight:700; text-decoration:none;
+  transition: transform .06s ease, filter .18s ease, background .18s ease;
+}
+.btn:hover{ filter: brightness(1.05); }
+.btn:active{ transform: translateY(1px); }
+.btn--ghost{ background: transparent; color: var(--text); border:1px solid var(--line); }
+.btn--orange{ background: var(--brand-2); color:#23160a; }
+
+/* ===== Tabelas genéricas (futuras listas) ===== */
+.table{ width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px; }
+.table th, .table td{ padding:12px 14px; border-bottom:1px solid var(--line); }
+.table th{ text-align:left; color:var(--muted); font-weight:600; background: #1b1e22; }
+.table tr:hover td{ background:#1a1e23; }
+
+/* ===== Responsivo ===== */
+@media (max-width:720px){
+  .nav{ gap:8px; }
+  .nav__link{ padding:6px 10px; }
+  .brand__name{ display:none; }  /* deixa só o ícone no mobile */
+}

@@ -1,0 +1,55 @@
+{% extends 'pages/base.html' %}
+{% block title %}Clientes · autoPRO{% endblock %}
+{% block content %}
+
+<h1>Clientes</h1>
+
+<form method="get" style="margin: 12px 0; display:flex; gap:8px;">
+  <input type="text" name="q" value="{{ q }}" placeholder="Buscar por nome, CPF/CNPJ ou e-mail" style="flex:1; padding:8px;">
+  <button class="btn" type="submit">Buscar</button>
+  <a class="btn btn--ghost" href="{% url 'clients:create' %}">+ New</a>
+</form>
+
+<div class="card" style="overflow:auto;">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>CPF/CNPJ</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th style="width:140px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in clients %}
+        <tr>
+          <td>{{ c.name }}</td>
+          <td>{{ c.cpf_cnpj }}</td>
+          <td>{{ c.phone|default:"—" }}</td>
+          <td>{{ c.email|default:"—" }}</td>
+          <td>
+            <a href="{% url 'clients:update' c.pk %}">Editar</a> ·
+            <a href="{% url 'clients:delete' c.pk %}">Excluir</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5">No client added.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% if is_paginated %}
+  <div style="margin-top:12px; display:flex; gap:8px; justify-content:center;">
+    {% if page_obj.has_previous %}
+      <a class="btn btn--ghost" href="?q={{ q }}&page={{ page_obj.previous_page_number }}">« Anterior</a>
+    {% endif %}
+    <span style="align-self:center;">Página {{ page_obj.number }} de {{ paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+      <a class="btn btn--ghost" href="?q={{ q }}&page={{ page_obj.next_page_number }}">Próxima »</a>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% endblock %}

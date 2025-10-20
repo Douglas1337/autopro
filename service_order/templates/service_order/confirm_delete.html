@@ -1,0 +1,13 @@
+{% extends 'pages/base.html' %}
+{% block title %}Delete Service Order · autoPRO{% endblock %}
+{% block content %}
+  <h1>Delete Service Order</h1>
+  <div class="card">
+    <p>Are you sure you want to delete <strong>Order #{{ object.id }}</strong> for {{ object.client.name }}?</p>
+    <form method="post" style="display:flex; gap:8px;">
+      {% csrf_token %}
+      <button class="btn btn--orange" type="submit">Yes, delete</button>
+      <a class="btn btn--ghost" href="{% url 'service_order:list' %}">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'pages/base.html' %}
+{% block title %}Service Orders · autoPRO{% endblock %}
+{% block content %}
+
+<h1>Service Orders</h1>
+
+<form method="get" style="margin: 12px 0; display:flex; gap:8px;">
+  <input type="text" name="q" value="{{ q }}" placeholder="Search by client or vehicle" style="flex:1; padding:8px;">
+  <select name="status" class="input" style="padding:8px;">
+    <option value="">All statuses</option>
+    {% for value, label in status_choices %}
+      <option value="{{ value }}" {% if status == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn" type="submit">Search</button>
+  <a class="btn btn--ghost" href="{% url 'service_order:create' %}">+ New</a>
+</form>
+
+<div class="card" style="overflow:auto;">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Client</th>
+        <th>Vehicle</th>
+        <th>Status</th>
+        <th>Labor Cost</th>
+        <th>Total</th>
+        <th>Expected Finish</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for o in orders %}
+        <tr>
+          <td>{{ o.id }}</td>
+          <td>{{ o.client.name }}</td>
+          <td>{{ o.vehicle.plate }}</td>
+          <td>{{ o.get_status_display }}</td>
+          <td>R$ {{ o.labor_cost }}</td>
+          <td>R$ {{ o.total_value }}</td>
+          <td>{{ o.expected_finish_date|date:"d/m/Y H:i" }}</td>
+          <td>
+            <a href="{% url 'service_order:update' o.pk %}">Edit</a> ·
+            <a href="{% url 'service_order:delete' o.pk %}">Delete</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="8">No service orders found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'pages/base.html' %}
+{% block title %}Excluir cliente · autoPRO{% endblock %}
+{% block content %}
+  <h1>Excluir cliente</h1>
+  <div class="card">
+    <p>Tem certeza que deseja excluir <strong>{{ object.name }}</strong> ({{ object.cpf_cnpj }})?</p>
+    <form method="post" style="display:flex; gap:8px;">
+      {% csrf_token %}
+      <button class="btn btn--orange" type="submit">Sim, excluir</button>
+      <a class="btn btn--ghost" href="{% url 'clients:list' %}">Cancelar</a>
+    </form>
+  </div>
+{% endblock %}

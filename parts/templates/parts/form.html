@@ -1,0 +1,14 @@
+{% extends 'pages/base.html' %}
+{% block title %}Peça · autoPRO{% endblock %}
+{% block content %}
+  <h1>{{ object.pk|yesno:"Editar peça,Nova peça" }}</h1>
+
+  <form method="post" class="card" style="display:grid; gap:12px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div style="display:flex; gap:8px;">
+      <button class="btn" type="submit">Salvar</button>
+      <a class="btn btn--ghost" href="{% url 'parts:list' %}">Cancelar</a>
+    </div>
+  </form>
+{% endblock %}

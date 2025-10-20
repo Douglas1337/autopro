@@ -1,0 +1,45 @@
+{% extends 'pages/base.html' %}
+{% block title %}Peças · autoPRO{% endblock %}
+{% block content %}
+<h1>Peças</h1>
+
+<form method="get" style="margin: 12px 0; display:flex; gap:8px;">
+  <input type="text" name="q" value="{{ q }}" placeholder="Buscar por nome ou código" style="flex:1; padding:8px;">
+  <button class="btn" type="submit">Buscar</button>
+  <a class="btn btn--ghost" href="{% url 'parts:create' %}">+ Nova</a>
+</form>
+
+<div class="card" style="overflow:auto;">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Internal Code</th>
+        <th>Fabrication code</th>
+        <th>Brand</th>
+        <th>In-Stock</th>
+        <th>Unitary Price</th>
+        <th style="width:140px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in parts %}
+        <tr>
+          <td>{{ p.name }}</td>
+          <td>{{ p.internal_code }}</td>
+          <td>{{ p.fabrication_code }}</td>
+          <td>{{ p.brand }}</td>
+          <td>{{ p.in_stock }}</td>
+          <td>R$ {{ p.unit_price }}</td>
+          <td>
+            <a href="{% url 'parts:update' p.pk %}">Editar</a> ·
+            <a href="{% url 'parts:delete' p.pk %}">Excluir</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="7">Nenhuma peça encontrada.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

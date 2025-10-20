@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}autoPRO{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'pages/css/style.css' %}">
+</head>
+<body class="theme-dark">
+  <header class="topbar">
+  <div class="topbar__inner container">
+    <a href="{% url 'pages:home' %}" class="brand">
+      <img class="brand__logo" src="{% static 'pages/img/autopro_logo.png' %}" alt="autoPRO">
+      <span class="brand__name">autoPRO</span>
+    </a>
+
+    <nav class="nav">
+      <a href="{% url 'clients:list' %}" class="nav__link">Clientes</a>
+      <a href="{% url 'vehicles:list' %}" class="nav__link">Veículos</a>
+      <a href="{% url 'parts:list' %}" class="nav__link">Peças</a>
+      <a href="{% url 'service_order:list' %}" class="nav__link">Ordens de Serviço</a>
+      <a href="/admin/" class="nav__link nav__link--cta">Admin</a>
+    </nav>
+  </div>
+</header>
+
+  <main class="container">
+      {% if messages %}
+  <div class="container" style="margin: 1rem auto 0;">
+    {% for message in messages %}
+      <div class="card" style="border-left:4px solid #16b5ff; margin-bottom:8px;">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© {{ now|date:"Y" }} autoPRO • ERP para oficinas</small>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends 'pages/base.html' %}
+{% block title %} Delete Vehicle {% endblock %}
+{% block content %}
+<h1> Delete Vehicle</h1>
+<div class="card">
+    <p>Do you really want to delete<strong> {{ object.plate}} - {{ object.brand }} {{ object.model }}</strong>?</p>
+    <form method="post" style="display: flex; gap: 8px;">
+        {% csrf_token %}
+        <button class="btn btn--orange" type="submit" > Yes, delete!</button>
+        <a class="btn btn--ghost" href="{% url 'vehicles:list' %}"> Cancel</a>
+    </form>
+
+</div>
+{% endblock %}

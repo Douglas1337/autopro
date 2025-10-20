@@ -1,0 +1,13 @@
+{% extends 'pages/base.html' %}
+{% block title %} Vehicle - autoPRO {% endblock %}
+{% block content %}
+<form method="post" class="card" style="display: grid; gap: 12px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div style="display: flex; gap: 8px;">
+        <button class="btn" type="submit"> Save </button>
+        <a class="btn btn--ghost" href="{% url 'vehicles:list' %}">Cancel</a>
+    </div>
+</form>
+{% endblock %}
+ 

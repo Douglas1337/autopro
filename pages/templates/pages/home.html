@@ -1,0 +1,21 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+  <section class="hero">
+    <h1 class="hero__title">Bem-vindo ao autoPRO</h1>
+    <p class="hero__subtitle">
+      Controle clientes, veículos, peças e ordens de serviço de forma simples e eficiente.
+    </p>
+    <div style="margin-top:16px; display:flex; gap:12px; justify-content:center;">
+      <a href="/admin/" class="btn btn--ghost">Administração</a>
+      <a href="{% url 'clients:list' %}" class="btn">Entrar no Sistema</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="card">
+      <h3 style="margin:0 0 6px;">Comece por aqui</h3>
+      <p class="muted">Cadastre clientes e veículos, depois crie sua primeira OS.</p>
+    </div>
+  </section>
+{% endblock %}
